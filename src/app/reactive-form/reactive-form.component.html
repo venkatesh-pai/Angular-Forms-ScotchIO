@@ -16,10 +16,13 @@
               class="form-control"
               required
               formControlName="name"
+              [ngClass]="{
+                'is-invalid': nameError
+              }"
             />
-            <span class="form-text text-danger" *ngIf="nameError">
+            <div class="invalid-feedback">
               {{ nameError }}
-            </span>
+            </div>
           </div>
         </div>
       </div>
@@ -38,10 +41,13 @@
               class="form-control"
               required
               formControlName="username"
+              [ngClass]="{
+                'is-invalid': usernameError
+              }"
             />
-            <span class="form-text text-danger" *ngIf="usernameError">
+            <div class="invalid-feedback">
               {{ usernameError }}
-            </span>
+            </div>
           </div>
         </div>
       </div>
