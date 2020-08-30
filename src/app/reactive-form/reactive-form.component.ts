@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-form',
@@ -9,12 +9,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class ReactiveFormComponent implements OnInit {
   form: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      name: new FormControl(''),
-      username: new FormControl('')
+    this.form = this.fb.group({
+      name: [''],
+      username: ['']
     });
   }
 
