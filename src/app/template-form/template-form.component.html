@@ -19,6 +19,7 @@
               name="name"
               required
               [(ngModel)]="user.name"
+              #name
             />
           </div>
         </div>
@@ -38,7 +39,9 @@
               name="username"
               required
               [(ngModel)]="user.username"
+              #username
             />
+            <div class="invalid-feedback">Please choose a username.</div>
           </div>
         </div>
       </div>
