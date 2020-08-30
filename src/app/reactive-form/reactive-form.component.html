@@ -83,7 +83,13 @@
                     class="form-control"
                     formControlName="city"
                     required
+                    [ngClass]="{
+                      'is-invalid':
+                        form.get('addresses')['controls'][i].controls.city.errors &&
+                        form.get('addresses')['controls'][i].controls.city.dirty
+                    }"
                   />
+                  <div class="invalid-feedback">City required</div>
                 </div>
               </div>
             </div>
@@ -102,7 +108,13 @@
                     class="form-control"
                     formControlName="country"
                     required
+                    [ngClass]="{
+                      'is-invalid':
+                        form.get('addresses')['controls'][i].controls.country.errors &&
+                        form.get('addresses')['controls'][i].controls.country.dirty
+                    }"
                   />
+                  <div class="invalid-feedback">Country is required</div>
                 </div>
               </div>
             </div>
