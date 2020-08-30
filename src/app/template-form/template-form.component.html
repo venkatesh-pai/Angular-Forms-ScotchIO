@@ -19,8 +19,13 @@
               name="name"
               required
               [(ngModel)]="user.name"
-              #name
+              #name="ngModel"
+              [ngClass]="{
+                'is-invalid': name.invalid && name.touched,
+                'is-valid': name.valid && name.touched
+              }"
             />
+            <div class="invalid-feedback">Name is required.</div>
           </div>
         </div>
       </div>
@@ -39,9 +44,13 @@
               name="username"
               required
               [(ngModel)]="user.username"
-              #username
+              #username="ngModel"
+              [ngClass]="{
+                'is-invalid': username.invalid && username.touched,
+                'is-valid': username.valid && username.touched
+              }"
             />
-            <div class="invalid-feedback">Please choose a username.</div>
+            <div class="invalid-feedback">Username is required.</div>
           </div>
         </div>
       </div>
