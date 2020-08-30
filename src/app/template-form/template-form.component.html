@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-6">
-    <form>
+    <div class="alert alert-success" *ngIf="isSubmitted">
+      <strong>User</strong> created successfully!.
+    </div>
+    <form (ngSubmit)="processForm()" *ngIf="!isSubmitted">
       <div class="form-group row">
         <label for="name" class="col-3 col-form-label">Name</label>
         <div class="col-9">
