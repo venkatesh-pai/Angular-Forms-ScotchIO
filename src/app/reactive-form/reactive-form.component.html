@@ -17,11 +17,11 @@
               required
               formControlName="name"
               [ngClass]="{
-                'is-invalid': nameError
+                'is-invalid': formErrors.name
               }"
             />
             <div class="invalid-feedback">
-              {{ nameError }}
+              {{ formErrors.name }}
             </div>
           </div>
         </div>
@@ -42,11 +42,11 @@
               required
               formControlName="username"
               [ngClass]="{
-                'is-invalid': usernameError
+                'is-invalid': formErrors.username
               }"
             />
             <div class="invalid-feedback">
-              {{ usernameError }}
+              {{ formErrors.username }}
             </div>
           </div>
         </div>

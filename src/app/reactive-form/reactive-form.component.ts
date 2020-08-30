@@ -8,6 +8,25 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ReactiveFormComponent implements OnInit {
   form: FormGroup;
+
+  formErrors = {
+    name: '',
+    username: ''
+  };
+
+  validationMessages = {
+    name: {
+      required: 'Name is required',
+      minlength: 'Name must be at least 3 characters',
+      maxlength: 'Name can\'t be longer than 10 characters'
+    },
+    username: {
+      required: 'Username is required',
+      minlength: 'Username must be at least 3 characters',
+      maxlength: 'Username can\'t be longer than 10 characters'
+    }
+  };
+
   nameError: string;
   usernameError: string;
 
@@ -27,32 +46,19 @@ export class ReactiveFormComponent implements OnInit {
   }
 
   validateForm(): void {
-    const name = this.form.get('name');
-    const username = this.form.get('username');
-    this.nameError = '';
-    this.usernameError = '';
+    // tslint:disable-next-line: forin
+    for (const field in this.formErrors) {
+      // clear input field errors
+      this.formErrors[field] = '';
 
-    if (name.invalid && name.dirty) {
-      if (name.errors.required) {
-        this.nameError = 'Name is required';
-      }
-      else if (name.errors.minlength) {
-        this.nameError = 'Name must be at least 3 characters';
-      }
-      else if (name.errors.maxlength) {
-        this.nameError = 'Name cannot be more than 10 characters';
-      }
-    }
+      // grab an iput field by name
+      const input = this.form.get(field);
 
-    if (username.invalid && username.dirty) {
-      if (username.errors.required) {
-        this.usernameError = 'Username is required';
-      }
-      else if (username.errors.minlength) {
-        this.usernameError = 'Username must be at least 3 characters';
-      }
-      else if (username.errors.maxlength) {
-        this.usernameError = 'Username cannot be more than 10 characters';
+      if (input.invalid && input.dirty) {
+        // tslint:disable-next-line: forin
+        for (const error in input.errors) {
+          this.formErrors[field] = this.validationMessages[field][error];
+        }
       }
     }
   }
