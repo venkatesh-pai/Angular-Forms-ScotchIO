@@ -15,8 +15,8 @@ export class ReactiveFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name: [''],
-      username: ['']
+      name: ['', [Validators.minLength(3), Validators.maxLength(10)]],
+      username: ['', [Validators.minLength(3), Validators.maxLength(10)]]
     });
 
 
@@ -25,13 +25,31 @@ export class ReactiveFormComponent implements OnInit {
         console.log('this.form.valueChanges:', data);
         const name = this.form.get('name');
         const username = this.form.get('username');
+        this.nameError = '';
+        this.usernameError = '';
 
         if (name.invalid && name.dirty) {
-          this.nameError = 'Name is required';
+          if (name.errors.required) {
+            this.nameError = 'Name is required';
+          }
+          else if (name.errors.minlength) {
+            this.nameError = 'Name must be at least 3 characters';
+          }
+          else if (name.errors.maxlength) {
+            this.nameError = 'Name cannot be more than 10 characters';
+          }
         }
 
         if (username.invalid && username.dirty) {
-          this.usernameError = 'Username is required';
+          if (username.errors.required) {
+            this.usernameError = 'Username is required';
+          }
+          else if (username.errors.minlength) {
+            this.usernameError = 'Username must be at least 3 characters';
+          }
+          else if (username.errors.maxlength) {
+            this.usernameError = 'Username cannot be more than 10 characters';
+          }
         }
       }
     );
