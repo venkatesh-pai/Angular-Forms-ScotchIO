@@ -12,4 +12,7 @@ export class ReactiveFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  processForm(): void {
+
+  }
 }
