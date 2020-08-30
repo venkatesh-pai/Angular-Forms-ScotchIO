@@ -11,7 +11,13 @@ export class ReactiveFormComponent implements OnInit {
 
   formErrors = {
     name: '',
-    username: ''
+    username: '',
+    addresses: [
+      {
+        city: '',
+        country: ''
+      }
+    ]
   };
 
   validationMessages = {
@@ -24,6 +30,18 @@ export class ReactiveFormComponent implements OnInit {
       required: 'Username is required',
       minlength: 'Username must be at least 3 characters',
       maxlength: 'Username can\'t be longer than 10 characters'
+    },
+    addresses: {
+      city: {
+        required: 'City is required',
+        minlength: 'City must be at least 3 characters',
+        maxlength: 'City can\'t be longer than 10 characters'
+      },
+      country: {
+        required: 'Country is required',
+        minlength: 'Country must be at least 3 characters',
+        maxlength: 'Country can\'t be longer than 10 characters'
+      }
     }
   };
 
@@ -40,13 +58,10 @@ export class ReactiveFormComponent implements OnInit {
     this.form = this.fb.group({
       name: ['', [Validators.minLength(3), Validators.maxLength(10)]],
       username: ['', [Validators.minLength(3), Validators.maxLength(10)]],
-      addresses: this.fb.array([
-        this.fb.group({
-          city: [''],
-          country: ['']
-        })
-      ])
+      addresses: this.fb.array([])
     });
+
+    this.addAddressForm();
 
     this.form.valueChanges.subscribe(data => this.validateForm());
   }
@@ -67,13 +82,35 @@ export class ReactiveFormComponent implements OnInit {
         }
       }
     }
+
+    this.validateAddresses();
+  }
+
+  validateAddresses(): void {
+    const addresses = this.form.get('addresses') as FormArray;
+    // Clear existing errors
+    this.formErrors.addresses = [];
+    for (let n = 0; n < addresses.length; n++) {
+      this.formErrors.addresses.push({ city: '', country: '' });
+      const address = addresses.at(n) as FormGroup;
+      // tslint:disable-next-line: forin
+      for (const field in address.controls) {
+        const input = address.get(field);
+        if (input.invalid && input.dirty) {
+          // tslint:disable-next-line: forin
+          for (const error in input.errors) {
+            this.formErrors.addresses[n][field] = this.validationMessages.addresses[field][error];
+          }
+        }
+      }
+    }
   }
 
   addAddressForm(): void {
     const addresses = this.form.get('addresses') as FormArray;
     addresses.push(this.fb.group({
-      city: [''],
-      country: ['']
+      city: ['', [Validators.minLength(3), Validators.maxLength(10)]],
+      country: ['', [Validators.minLength(3), Validators.maxLength(10)]]
     }));
   }
 
