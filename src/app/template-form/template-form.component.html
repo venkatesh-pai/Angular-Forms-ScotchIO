@@ -10,7 +10,13 @@
                 <i class="fa fa-address-book-o"></i>
               </div>
             </div>
-            <input type="text" class="form-control" name="name" required />
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              required
+              [(ngModel)]="user.name"
+            />
           </div>
         </div>
       </div>
@@ -23,7 +29,13 @@
                 <i class="fa fa-user-circle-o"></i>
               </div>
             </div>
-            <input type="text" class="form-control" name="username" required />
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              required
+              [(ngModel)]="user.username"
+            />
           </div>
         </div>
       </div>
@@ -36,5 +48,7 @@
       </div>
     </form>
   </div>
-  <div class="col-6"></div>
+  <div class="col-6">
+    <pre>{{ diagnostic }}</pre>
+  </div>
 </div>
