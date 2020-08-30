@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-6">
-    <form (ngSubmit)="processForm()">
+    <form (ngSubmit)="processForm()" [formGroup]="form">
       <div class="form-group row">
         <label for="name" class="col-3 col-form-label">Name</label>
         <div class="col-9">
@@ -10,7 +10,13 @@
                 <i class="fa fa-address-book-o"></i>
               </div>
             </div>
-            <input name="name" type="text" class="form-control" required />
+            <input
+              name="name"
+              type="text"
+              class="form-control"
+              required
+              formControlName="name"
+            />
           </div>
         </div>
       </div>
@@ -23,7 +29,13 @@
                 <i class="fa fa-user-circle-o"></i>
               </div>
             </div>
-            <input name="username" type="text" required />
+            <input
+              name="username"
+              type="text"
+              class="form-control"
+              required
+              formControlName="username"
+            />
           </div>
         </div>
       </div>
