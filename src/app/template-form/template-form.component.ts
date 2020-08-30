@@ -12,6 +12,7 @@ export class User {
 })
 export class TemplateFormComponent implements OnInit {
   user: User;
+  isSubmitted = false;
 
   constructor() { }
 
@@ -21,5 +22,10 @@ export class TemplateFormComponent implements OnInit {
 
   get diagnostic(): string {
     return JSON.stringify(this.user);
+  }
+
+  processForm(): void {
+    console.log(this.user);
+    this.isSubmitted = true;
   }
 }
