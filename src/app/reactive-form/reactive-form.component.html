@@ -17,6 +17,9 @@
               required
               formControlName="name"
             />
+            <span class="form-text text-danger" *ngIf="nameError">
+              {{ nameError }}
+            </span>
           </div>
         </div>
       </div>
@@ -36,6 +39,9 @@
               required
               formControlName="username"
             />
+            <span class="form-text text-danger" *ngIf="usernameError">
+              {{ usernameError }}
+            </span>
           </div>
         </div>
       </div>
