@@ -3,7 +3,7 @@
     <div class="alert alert-success" *ngIf="isSubmitted">
       <strong>User</strong> created successfully!.
     </div>
-    <form (ngSubmit)="processForm()" *ngIf="!isSubmitted">
+    <form #userForm="ngForm" (ngSubmit)="processForm()" *ngIf="!isSubmitted">
       <div class="form-group row">
         <label for="name" class="col-3 col-form-label">Name</label>
         <div class="col-9">
@@ -56,7 +56,12 @@
       </div>
       <div class="form-group row">
         <div class="offset-3 col-9">
-          <button name="submit" type="submit" class="btn btn-success">
+          <button
+            name="submit"
+            type="submit"
+            class="btn btn-success"
+            [disabled]="userForm.invalid"
+          >
             Submit
           </button>
         </div>
